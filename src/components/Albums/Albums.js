@@ -19,6 +19,7 @@ class Albums extends Component {
           {this.state.albums.map(album => (
             <AlbumListItem
               key={album.id}
+              id={album.id}
               title={album.title}
               userId={album.userId}
             />

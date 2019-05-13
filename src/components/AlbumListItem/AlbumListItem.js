@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class AlbumListItem extends Component {
   render() {
-    const { title } = this.props;
+    const { title, id } = this.props;
     return (
       <li>
-        <h3>{title}</h3>
+        <Link to={`/album/${id}`}>
+          <h3>{title}</h3>
+        </Link>
       </li>
     );
   }
