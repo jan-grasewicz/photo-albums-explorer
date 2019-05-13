@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from "react-router-dom"
-import Albums from '../Albums/Albums';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Albums from "../Albums/Albums";
 
 class Root extends Component {
   render() {
@@ -9,11 +9,11 @@ class Root extends Component {
         <h1>XyZ</h1>
         <p>photo albums explorer</p>
         <Router>
-            <Route path="/" component={Albums} />
+          <Route path="/" component={Albums} />
         </Router>
       </div>
-    )
+    );
   }
 }
 
-export default Root
+export default Root;
