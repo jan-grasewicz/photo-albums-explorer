@@ -19,8 +19,17 @@ class Root extends Component {
         <h1>XyZ</h1>
         <p>photo albums explorer</p>
         <Router>
-          <Route exact path="/" render={()=><Albums albums={this.state.albums}/>} />
-          <Route path="/album/:albumId" render={({match})=><Album match={match} albums={this.state.albums}/>} />
+          <Route
+            exact
+            path="/"
+            render={() => <Albums albums={this.state.albums} />}
+          />
+          <Route
+            path="/album/:albumId"
+            render={({ match }) => (
+              <Album match={match} albums={this.state.albums} />
+            )}
+          />
         </Router>
       </div>
     );
