@@ -17,13 +17,18 @@ class Album extends Component {
       .then(photos => this.setState({ photos }));
   }
   render() {
-    const { photos } = this.state;
     const { albumId } = this.props.match.params;
-    const { albums } = this.props.appContext;
+    const { photos } = this.state;
+    const { albums, getSingleUserData } = this.props.appContext;
+
     const album = albums.find(album => album.id === parseInt(albumId));
+    const userData = getSingleUserData(album !== undefined && album.userId);
     return (
       <div>
-        <h2>Album - {album && album.title}</h2>
+        <h2>Album - {album !== undefined && album.title}</h2>
+        <Link to={`/user/${userData !== undefined && userData.id}`}>
+          <p>{userData !== undefined && userData.name}</p>
+        </Link>
         <ul>
           {photos.map(photo => (
             <li key={photo.id}>
