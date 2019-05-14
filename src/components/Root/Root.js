@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Albums from "../Albums/Albums";
 import Album from "../Album/Album";
+import Photo from "../Photo/Photo";
 
 class Root extends Component {
   state = {
@@ -30,6 +31,7 @@ class Root extends Component {
               <Album match={match} albums={this.state.albums} />
             )}
           />
+          <Route path={`/photo/:photoId`} component={Photo} />
         </Router>
       </div>
     );
