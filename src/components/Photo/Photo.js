@@ -19,11 +19,9 @@ class Photo extends Component {
 
   render() {
     const { photo } = this.state;
-    const { getSingleUserData, albums } = this.props.appContext;
+    const { getUserDataByAlbumId } = this.props.appContext;
 
-    const album = albums.find(album => album.id === photo.albumId);
-    const userData = getSingleUserData(album !== undefined && album.userId);
-
+    const userData = getUserDataByAlbumId(photo.albumId);
     return (
       <div>
         <h3>{photo.title}</h3>

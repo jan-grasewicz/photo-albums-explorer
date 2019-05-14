@@ -7,8 +7,16 @@ export default class AppContextProvider extends Component {
   state = {
     users: [],
     albums: [],
-    getSingleUserData: userId =>
-      this.state.users.find(user => user.id === userId)
+    getUserDataByUserId: userId =>
+      this.state.users.find(user => user.id === userId),
+    getUserDataByAlbumId: albumId => {
+      const album = this.state.albums.find(album => album.id === albumId);
+      return this.state.getUserDataByUserId(
+        album !== undefined && album.userId
+      );
+    },
+    getAlbumDataByAlbumId: albumId =>
+      this.state.albums.find(album => album.id === albumId)
   };
 
   componentDidMount() {

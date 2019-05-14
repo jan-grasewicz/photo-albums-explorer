@@ -19,10 +19,14 @@ class Album extends Component {
   render() {
     const { albumId } = this.props.match.params;
     const { photos } = this.state;
-    const { albums, getSingleUserData } = this.props.appContext;
+    const {
+      getUserDataByAlbumId,
+      getAlbumDataByAlbumId
+    } = this.props.appContext;
 
-    const album = albums.find(album => album.id === parseInt(albumId));
-    const userData = getSingleUserData(album !== undefined && album.userId);
+    const album = getAlbumDataByAlbumId(parseInt(albumId));
+    const userData = getUserDataByAlbumId(parseInt(albumId));
+
     return (
       <div>
         <h2>Album - {album !== undefined && album.title}</h2>

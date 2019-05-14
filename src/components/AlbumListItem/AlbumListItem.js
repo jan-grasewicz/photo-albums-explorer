@@ -8,9 +8,9 @@ class AlbumListItem extends Component {
       title,
       id,
       userId,
-      appContext: { getSingleUserData }
+      appContext: { getUserDataByUserId }
     } = this.props;
-    const userData = getSingleUserData(userId);
+    const userData = getUserDataByUserId(userId);
     return (
       <li>
         <Link to={`/album/${id}`}>
