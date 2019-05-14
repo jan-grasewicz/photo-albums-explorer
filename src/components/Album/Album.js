@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withContext } from "../../contexts/AppContext";
 
 class Album extends Component {
   state = {
@@ -17,12 +18,8 @@ class Album extends Component {
   }
   render() {
     const { photos } = this.state;
-    const {
-      albums,
-      match: {
-        params: { albumId }
-      }
-    } = this.props;
+    const { albumId } = this.props.match.params;
+    const { albums } = this.props.appContext;
     const album = albums.find(album => album.id === parseInt(albumId));
     return (
       <div>
@@ -41,4 +38,4 @@ class Album extends Component {
   }
 }
 
-export default Album;
+export default withContext(Album);

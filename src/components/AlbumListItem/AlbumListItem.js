@@ -4,8 +4,13 @@ import { withContext } from "../../contexts/AppContext";
 
 class AlbumListItem extends Component {
   render() {
-    const { title, id, userId, appContext } = this.props;
-    const userData = appContext.getSingleUserData(userId);
+    const {
+      title,
+      id,
+      userId,
+      appContext: { getSingleUserData }
+    } = this.props;
+    const userData = getSingleUserData(userId);
     return (
       <li>
         <Link to={`/album/${id}`}>

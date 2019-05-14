@@ -6,6 +6,7 @@ const { Provider, Consumer } = AppContext;
 export default class AppContextProvider extends Component {
   state = {
     users: [],
+    albums: [],
     getSingleUserData: userId =>
       this.state.users.find(user => user.id === userId)
   };
@@ -14,6 +15,10 @@ export default class AppContextProvider extends Component {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then(response => response.json())
       .then(users => this.setState({ users }));
+
+    fetch("https://jsonplaceholder.typicode.com/albums")
+      .then(response => response.json())
+      .then(albums => this.setState({ albums }));
   }
 
   render() {

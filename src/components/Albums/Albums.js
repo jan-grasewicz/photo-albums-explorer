@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AlbumListItem from "../AlbumListItem/AlbumListItem";
+import { withContext } from "../../contexts/AppContext";
 
 class Albums extends Component {
   render() {
@@ -7,7 +8,7 @@ class Albums extends Component {
       <div>
         <h1>Albums</h1>
         <ul>
-          {this.props.albums.map(album => (
+          {this.props.appContext.albums.map(album => (
             <AlbumListItem
               key={album.id}
               id={album.id}
@@ -21,4 +22,4 @@ class Albums extends Component {
   }
 }
 
-export default Albums;
+export default withContext(Albums);
