@@ -26,7 +26,7 @@ class Photo extends Component {
       <div>
         <h3>{photo.title}</h3>
         <Link to={`/user/${userData !== undefined && userData.id}`}>
-          <p>{userData !== undefined && userData.name}</p>
+          <p>{userData !== undefined && userData.username}</p>
         </Link>
         <img src={photo.url} alt="fullsize" />
       </div>

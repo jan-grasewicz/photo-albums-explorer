@@ -16,9 +16,11 @@ class AlbumListItem extends Component {
         <Link to={`/album/${id}`}>
           <h3>{title}</h3>
         </Link>
-        <Link to={`/user/${userId}`}>
-          <p>{userData !== undefined && userData.name}</p>
-        </Link>
+        {userId && (
+          <Link to={`/user/${userId}`}>
+            <p>{userData !== undefined && userData.username}</p>
+          </Link>
+        )}
       </li>
     );
   }

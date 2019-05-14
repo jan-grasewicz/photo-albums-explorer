@@ -4,14 +4,14 @@ import Albums from "../Albums/Albums";
 import Album from "../Album/Album";
 import Photo from "../Photo/Photo";
 import UserProfile from "../UserProfile/UserProfile";
+import Header from "../Header/Header";
 
 class Root extends Component {
   render() {
     return (
       <div>
-        <h1>XyZ</h1>
-        <p>photo albums explorer</p>
         <Router>
+          <Header />
           <Switch>
             <Route exact path="/" component={Albums} />
             <Route path="/album/:albumId" component={Album} />

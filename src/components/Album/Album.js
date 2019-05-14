@@ -31,7 +31,7 @@ class Album extends Component {
       <div>
         <h2>Album - {album !== undefined && album.title}</h2>
         <Link to={`/user/${userData !== undefined && userData.id}`}>
-          <p>{userData !== undefined && userData.name}</p>
+          <p>{userData !== undefined && userData.username}</p>
         </Link>
         <ul>
           {photos.map(photo => (
