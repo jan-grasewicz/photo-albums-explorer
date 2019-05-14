@@ -17,7 +17,6 @@ class Photo extends Component {
 
   render() {
     const { photo } = this.state;
-    console.log(this.state.photo);
     return (
       <div>
         <h3>{photo.title}</h3>
