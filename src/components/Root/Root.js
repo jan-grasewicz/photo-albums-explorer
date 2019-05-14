@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Albums from "../Albums/Albums";
 import Album from "../Album/Album";
 import Photo from "../Photo/Photo";
+import UserProfile from "../UserProfile/UserProfile";
 
 class Root extends Component {
   state = {
@@ -33,6 +34,7 @@ class Root extends Component {
               )}
             />
             <Route path={`/photo/:photoId`} component={Photo} />
+            <Route path={`/user/:userId`} component={UserProfile} />
             <Route render={() => <h3>Page does not exist.</h3>} />
           </Switch>
         </Router>
