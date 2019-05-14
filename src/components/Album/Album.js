@@ -42,8 +42,3 @@ class Album extends Component {
 }
 
 export default Album;
-
-{
-  /* <Route path={`${match.path}/photo/:photoId`} component={Photo} />
-<Link to={`${match.url}/photo/${photo.id}`}></Link> */
-}
