@@ -37,15 +37,32 @@ class Photo extends Component {
     const userData = getUserDataByAlbumId(photo.albumId);
     return (
       <div className="top-bar-fix">
-        {isLoading ? <p>Loading...</p> : <h3>{photo.title}</h3>}
-        {isContextDataLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <Link to={`/user/${userData !== undefined && userData.id}`}>
-            <p>{userData !== undefined && userData.username}</p>
-          </Link>
-        )}
-        {isLoading ? <p>Loading...</p> : <img src={photo.url} alt="fullsize" />}
+        <div className="photo__display">
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <img className="photo__img" src={photo.url} alt="fullsize" />
+          )}
+        </div>
+        <div className="photo__info">
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <h3 className="photo__info__title">{photo.title}</h3>
+          )}
+          {isContextDataLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <>
+              <span className="photo__info__span"> by </span>
+              <Link to={`/user/${userData !== undefined && userData.id}`}>
+                <p className="photo__info__author">
+                  {userData !== undefined && userData.username}
+                </p>
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     );
   }

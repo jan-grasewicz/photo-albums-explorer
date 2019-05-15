@@ -18,16 +18,18 @@ class UserProfile extends Component {
         ) : (
           <div>
             {userData !== undefined && (
-              <>
+              <div className="profile__user-data">
                 <h2>{userData.username}'s Profile</h2>
-                <p>name: {userData.name}</p>
+                <p>full name: {userData.name}</p>
                 <p>e-mail: {userData.email}</p>
                 <p>website: {userData.website}</p>
-              </>
+              </div>
             )}
             {userData !== undefined && (
               <>
-                <h3>{userData.username}'s albums</h3>
+                <h3 className="profile__album-title">
+                  {userData.username}'s albums
+                </h3>
                 <ul>
                   {albums
                     .filter(album => album.userId === userData.id)

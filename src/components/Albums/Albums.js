@@ -9,7 +9,7 @@ class Albums extends Component {
     const { albums, isLoading } = this.props.appContext;
     return (
       <div className="top-bar-fix">
-        <h1>Albums</h1>
+        <h2 className="albums__title">Albums</h2>
         {isLoading ? (
           <p>Loading...</p>
         ) : (

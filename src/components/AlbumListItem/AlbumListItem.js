@@ -35,20 +35,33 @@ class AlbumListItem extends Component {
     } = this.props;
     const userData = getUserDataByUserId(userId);
     return (
-      <li>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <img src={photo.thumbnailUrl} alt="thumbnail" />
-        )}
-        <Link to={`/album/${id}`}>
-          <h3>{title}</h3>
-        </Link>
-        {userId && (
-          <Link to={`/user/${userId}`}>
-            <p>{userData !== undefined && userData.username}</p>
+      <li className="album-li">
+        <div className="album-li__img-container">
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <img
+              className="album-li__img"
+              src={photo.thumbnailUrl}
+              alt="thumbnail"
+            />
+          )}
+        </div>
+        <div className="album-li__txt">
+          <Link to={`/album/${id}`}>
+            <h3 className="album-li__title">{title}</h3>
           </Link>
-        )}
+          {userId && (
+            <>
+              <span> by </span>
+              <Link to={`/user/${userId}`}>
+                <p className="album-li__author">
+                  {userData !== undefined && userData.username}
+                </p>
+              </Link>
+            </>
+          )}
+        </div>
       </li>
     );
   }
