@@ -16,21 +16,28 @@ class UserProfile extends Component {
         {isLoading ? (
           <p>Loading...</p>
         ) : (
-          <div>
+          <div className="profile">
             {userData !== undefined && (
               <div className="profile__user-data">
-                <h2>{userData.username}'s Profile</h2>
-                <p>full name: {userData.name}</p>
-                <p>e-mail: {userData.email}</p>
-                <p>website: {userData.website}</p>
+                <h2 className="profile__user-data__title">
+                  {userData.username}'s Profile
+                </h2>
+                <div className="profile__user-data__content">
+                  <p>full name: </p>
+                  <p>{userData.name}</p>
+                  <p>e-mail: </p>
+                  <p>{userData.email}</p>
+                  <p>website: </p>
+                  <p>{userData.website}</p>
+                </div>
               </div>
             )}
             {userData !== undefined && (
-              <>
-                <h3 className="profile__album-title">
+              <div className="profile__albums-section">
+                <h3 className="profile__albums-title">
                   {userData.username}'s albums
                 </h3>
-                <ul>
+                <ul className="profile__albums">
                   {albums
                     .filter(album => album.userId === userData.id)
                     .map(album => (
@@ -41,7 +48,7 @@ class UserProfile extends Component {
                       />
                     ))}
                 </ul>
-              </>
+              </div>
             )}
           </div>
         )}

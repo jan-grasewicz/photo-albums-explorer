@@ -13,7 +13,7 @@ class Albums extends Component {
         {isLoading ? (
           <p>Loading...</p>
         ) : (
-          <ul>
+          <ul className="albums__list">
             {albums.map(album => (
               <AlbumListItem
                 key={album.id}
