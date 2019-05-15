@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withContext } from "../../contexts/AppContext";
 
+import "./Album.css";
+
 class Album extends Component {
   state = {
     photos: [],

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withContext } from "../../contexts/AppContext";
 
+import "./Photo.css";
+
 class Photo extends Component {
   state = {
     photo: {},

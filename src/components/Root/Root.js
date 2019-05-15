@@ -6,6 +6,8 @@ import Photo from "../Photo/Photo";
 import UserProfile from "../UserProfile/UserProfile";
 import Header from "../Header/Header";
 
+import "./Root.css";
+
 class Root extends Component {
   render() {
     return (

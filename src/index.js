@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import AppContextProvider from "./contexts/AppContext";
+import Root from "./components/Root/Root";
+
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import Root from "./components/Root/Root";
-import AppContextProvider from "./contexts/AppContext";
 
 ReactDOM.render(
   <AppContextProvider>

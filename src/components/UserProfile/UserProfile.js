@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { withContext } from "../../contexts/AppContext";
 import AlbumListItem from "../AlbumListItem/AlbumListItem";
 
+import "./UserProfile.css";
+
 class UserProfile extends Component {
   render() {
     const {
