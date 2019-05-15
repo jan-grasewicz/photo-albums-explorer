@@ -4,7 +4,9 @@ import { withContext } from "../../contexts/AppContext";
 
 class Album extends Component {
   state = {
-    photos: []
+    photos: [],
+    isLoading: true,
+    error: null
   };
 
   componentDidMount() {
@@ -14,14 +16,19 @@ class Album extends Component {
       }`
     )
       .then(response => response.json())
-      .then(photos => this.setState({ photos }));
+      .then(photos => this.setState({ photos, isLoading: false, error: null }))
+      .catch(error =>
+        this.setState({ error: error.message, isLoading: false })
+      );
   }
   render() {
     const { albumId } = this.props.match.params;
-    const { photos } = this.state;
+    const { photos, isLoading, error } = this.state;
+    error && console.error(error);
     const {
       getUserDataByAlbumId,
-      getAlbumDataByAlbumId
+      getAlbumDataByAlbumId,
+      isLoading: isContextDataLoading
     } = this.props.appContext;
 
     const album = getAlbumDataByAlbumId(parseInt(albumId));
@@ -29,19 +36,30 @@ class Album extends Component {
 
     return (
       <div>
-        <h2>Album - {album !== undefined && album.title}</h2>
-        <Link to={`/user/${userData !== undefined && userData.id}`}>
-          <p>{userData !== undefined && userData.username}</p>
-        </Link>
-        <ul>
-          {photos.map(photo => (
-            <li key={photo.id}>
-              <Link to={`/photo/${photo.id}`}>
-                <img src={photo.thumbnailUrl} alt="thumbnail" />
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {isContextDataLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            <h2>Album - {album !== undefined && album.title}</h2>
+            <Link to={`/user/${userData !== undefined && userData.id}`}>
+              <p>{userData !== undefined && userData.username}</p>
+            </Link>
+          </>
+        )}
+
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <ul>
+            {photos.map(photo => (
+              <li key={photo.id}>
+                <Link to={`/photo/${photo.id}`}>
+                  <img src={photo.thumbnailUrl} alt="thumbnail" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     );
   }

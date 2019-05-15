@@ -4,7 +4,9 @@ import { withContext } from "../../contexts/AppContext";
 
 class AlbumListItem extends Component {
   state = {
-    photo: {}
+    photo: {},
+    isLoading: true,
+    error: null
   };
 
   componentDidMount() {
@@ -12,11 +14,17 @@ class AlbumListItem extends Component {
       `https://jsonplaceholder.typicode.com/photos?albumId=${this.props.id}`
     )
       .then(response => response.json())
-      .then(photos => this.setState({ photo: photos[0] }));
+      .then(photos =>
+        this.setState({ photo: photos[0], isLoading: false, error: null })
+      )
+      .catch(error =>
+        this.setState({ error: error.message, isLoading: false })
+      );
   }
 
   render() {
-    const { photo } = this.state;
+    const { photo, isLoading, error } = this.state;
+    error && console.error(error);
     const {
       title,
       id,
@@ -26,7 +34,11 @@ class AlbumListItem extends Component {
     const userData = getUserDataByUserId(userId);
     return (
       <li>
-        <img src={photo.thumbnailUrl} alt="thumbnail" />
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <img src={photo.thumbnailUrl} alt="thumbnail" />
+        )}
         <Link to={`/album/${id}`}>
           <h3>{title}</h3>
         </Link>

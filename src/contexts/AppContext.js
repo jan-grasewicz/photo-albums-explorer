@@ -16,20 +16,32 @@ export default class AppContextProvider extends Component {
       );
     },
     getAlbumDataByAlbumId: albumId =>
-      this.state.albums.find(album => album.id === albumId)
+      this.state.albums.find(album => album.id === albumId),
+    isLoading: true,
+    error: null
   };
 
-  componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then(response => response.json())
-      .then(users => this.setState({ users }));
+  usersPromise = fetch("https://jsonplaceholder.typicode.com/users").then(
+    response => response.json()
+  );
+  albumsPromise = fetch("https://jsonplaceholder.typicode.com/albums").then(
+    response => response.json()
+  );
 
-    fetch("https://jsonplaceholder.typicode.com/albums")
-      .then(response => response.json())
-      .then(albums => this.setState({ albums }));
+  componentDidMount() {
+    Promise.all([this.usersPromise, this.albumsPromise])
+      .then(([users, albums]) => {
+        this.setState({ users });
+        this.setState({ albums });
+      })
+      .then(() => this.setState({ error: null, isLoading: false }))
+      .catch(error =>
+        this.setState({ error: error.message, isLoading: false })
+      );
   }
 
   render() {
+    this.state.error && console.error(this.state.error);
     return <Provider value={this.state}>{this.props.children}</Provider>;
   }
 }

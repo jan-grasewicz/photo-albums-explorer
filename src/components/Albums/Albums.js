@@ -4,19 +4,24 @@ import { withContext } from "../../contexts/AppContext";
 
 class Albums extends Component {
   render() {
+    const { albums, isLoading } = this.props.appContext;
     return (
       <div>
         <h1>Albums</h1>
-        <ul>
-          {this.props.appContext.albums.map(album => (
-            <AlbumListItem
-              key={album.id}
-              id={album.id}
-              title={album.title}
-              userId={album.userId}
-            />
-          ))}
-        </ul>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <ul>
+            {albums.map(album => (
+              <AlbumListItem
+                key={album.id}
+                id={album.id}
+                title={album.title}
+                userId={album.userId}
+              />
+            ))}
+          </ul>
+        )}
       </div>
     );
   }
