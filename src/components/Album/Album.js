@@ -37,7 +37,7 @@ class Album extends Component {
     const userData = getUserDataByAlbumId(parseInt(albumId));
 
     return (
-      <div>
+      <div className="top-bar-fix">
         {isContextDataLoading ? (
           <p>Loading...</p>
         ) : (

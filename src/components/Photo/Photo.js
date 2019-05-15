@@ -36,7 +36,7 @@ class Photo extends Component {
 
     const userData = getUserDataByAlbumId(photo.albumId);
     return (
-      <div>
+      <div className="top-bar-fix">
         {isLoading ? <p>Loading...</p> : <h3>{photo.title}</h3>}
         {isContextDataLoading ? (
           <p>Loading...</p>

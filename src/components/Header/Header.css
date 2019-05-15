@@ -1,0 +1,19 @@
+.header{
+    background: whitesmoke;
+    width: 100vw;
+    border-bottom: 1px solid black;
+    box-shadow: 0px 2px 10px black;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+}
+
+.header__app-name{
+    font-size: 1.8rem;
+}
+
+.header__app-desc{
+    font-size: 1.1rem;
+}

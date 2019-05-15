@@ -12,7 +12,7 @@ class UserProfile extends Component {
     } = this.props;
     const userData = getUserDataByUserId(parseInt(match.params.userId));
     return (
-      <>
+      <div className="top-bar-fix">
         {isLoading ? (
           <p>Loading...</p>
         ) : (
@@ -43,7 +43,7 @@ class UserProfile extends Component {
             )}
           </div>
         )}
-      </>
+      </div>
     );
   }
 }
