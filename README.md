@@ -18,3 +18,4 @@ And enter it's directory.
 >**yarn**\
 >**yarn start**
 - App should open in your browser. If not, Ctrl+Click on one of the links that appeared in console.
+- To close the server press Ctrl+C in console.
