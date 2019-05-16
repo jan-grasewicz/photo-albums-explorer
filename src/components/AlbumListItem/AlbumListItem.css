@@ -1,0 +1,32 @@
+.album-li{
+    background: whitesmoke;
+    box-shadow: 0px 1px 5px black;
+    margin:  0rem;
+    padding: 0.5rem;
+    display: flex;
+}
+
+.album-li__img-container{
+    align-self: center;
+    margin-right: 0.5rem;
+    height: 100px; 
+    width: 100px; 
+}
+
+.album-li__img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+}
+
+.album-li__txt{
+    font-size: 1rem;
+    align-self: center;
+    text-align: initial;
+}
+
+.album-li__title, .album-li__author{
+    display: inline;
+}
+
