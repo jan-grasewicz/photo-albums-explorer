@@ -1,6 +1,7 @@
 ## How to start this app:
-- Clone this repository to your computer, like this.
-https://help.github.com/en/articles/cloning-a-repository
+- Clone this repository to your computer, like this.\
+https://help.github.com/en/articles/cloning-a-repository \
+And enter it's directory.
 ### For production build
 - Please switch branch to "build".
 >**git checkout build**
@@ -9,6 +10,7 @@ https://help.github.com/en/articles/cloning-a-repository
 >**serve -s build**
 - Ctrl+Click on one of the links that appeared.
 - App should open in your browser.
+- To close the server press Ctrl+C in console.
 ### For developer build
 - Enter in console while being on branch "master":
 >**yarn**\
