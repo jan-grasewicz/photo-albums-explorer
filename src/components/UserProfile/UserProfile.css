@@ -48,7 +48,7 @@
     }
 }
 
-@media (min-width:1000px){
+@media (min-width:1000px) and (max-width:1399px){
     .profile{
         display:grid;
         grid-template-columns: 1fr 3fr;
@@ -75,5 +75,35 @@
 
     .profile__albums{
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width:1400px){
+    .profile{
+        display:grid;
+        grid-template-columns: 1fr 4fr;
+        grid-gap: 1rem;
+        padding: 0px 0.5rem;
+    }
+
+    .profile__user-data{
+        line-height: 2rem;
+        margin: 1rem 0rem 0px;
+    }
+
+    .profile__user-data__title{
+        padding: 2rem 0rem;
+    }
+
+    .profile__albums-title{
+        margin: 1rem 0rem;
+    }
+
+    .profile__user-data__content{
+        display:initial;
+    }
+
+    .profile__albums{
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
