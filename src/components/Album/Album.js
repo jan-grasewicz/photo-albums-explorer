@@ -16,6 +16,8 @@ class Album extends Component {
     this.setState({ windowWidth: window.innerWidth });
   };
 
+  abortController = new AbortController();
+
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
@@ -23,7 +25,10 @@ class Album extends Component {
     fetch(
       `https://jsonplaceholder.typicode.com/photos?albumId=${
         this.props.match.params.albumId
-      }`
+      }`,
+      {
+        signal: this.abortController.signal
+      }
     )
       .then(response => response.json())
       .then(photos => this.setState({ photos, isLoading: false, error: null }))
@@ -34,6 +39,7 @@ class Album extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateWindowDimensions);
+    this.abortController.abort();
   }
 
   render() {

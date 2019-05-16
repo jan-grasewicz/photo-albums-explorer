@@ -11,11 +11,16 @@ class Photo extends Component {
     error: null
   };
 
+  abortController = new AbortController();
+
   componentDidMount() {
     fetch(
       `https://jsonplaceholder.typicode.com/photos?id=${
         this.props.match.params.photoId
-      }`
+      }`,
+      {
+        signal: this.abortController.signal
+      }
     )
       .then(response => response.json())
       .then(photo =>
@@ -24,6 +29,10 @@ class Photo extends Component {
       .catch(error =>
         this.setState({ error: error.message, isLoading: false })
       );
+  }
+
+  componentWillUnmount() {
+    this.abortController.abort();
   }
 
   render() {

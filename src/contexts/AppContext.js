@@ -21,12 +21,14 @@ export default class AppContextProvider extends Component {
     error: null
   };
 
-  usersPromise = fetch("https://jsonplaceholder.typicode.com/users").then(
-    response => response.json()
-  );
-  albumsPromise = fetch("https://jsonplaceholder.typicode.com/albums").then(
-    response => response.json()
-  );
+  abortController = new AbortController();
+
+  usersPromise = fetch("https://jsonplaceholder.typicode.com/users", {
+    signal: this.abortController.signal
+  }).then(response => response.json());
+  albumsPromise = fetch("https://jsonplaceholder.typicode.com/albums", {
+    signal: this.abortController.signal
+  }).then(response => response.json());
 
   componentDidMount() {
     Promise.all([this.usersPromise, this.albumsPromise])
@@ -38,6 +40,10 @@ export default class AppContextProvider extends Component {
       .catch(error =>
         this.setState({ error: error.message, isLoading: false })
       );
+  }
+
+  componentWillUnmount() {
+    this.abortController.abort();
   }
 
   render() {

@@ -11,9 +11,14 @@ class AlbumListItem extends Component {
     error: null
   };
 
+  abortController = new AbortController();
+
   componentDidMount() {
     fetch(
-      `https://jsonplaceholder.typicode.com/photos?albumId=${this.props.id}`
+      `https://jsonplaceholder.typicode.com/photos?albumId=${this.props.id}`,
+      {
+        signal: this.abortController.signal
+      }
     )
       .then(response => response.json())
       .then(photos =>
@@ -22,6 +27,10 @@ class AlbumListItem extends Component {
       .catch(error =>
         this.setState({ error: error.message, isLoading: false })
       );
+  }
+
+  componentWillUnmount() {
+    this.abortController.abort();
   }
 
   render() {
