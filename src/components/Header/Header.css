@@ -23,6 +23,10 @@
     border: none;
 }
 
+.header__btn:focus{
+    outline:none;
+}
+
 .header__btn__img{
     height: 2rem; 
 }
