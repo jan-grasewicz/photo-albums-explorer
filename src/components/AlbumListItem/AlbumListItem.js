@@ -5,44 +5,15 @@ import { withContext } from "../../contexts/AppContext";
 import "./AlbumListItem.css";
 
 class AlbumListItem extends Component {
-  state = {
-    photo: {},
-    isLoading: true,
-    error: null
-  };
-
-  abortController = new AbortController();
-
-  componentDidMount() {
-    fetch(
-      `https://jsonplaceholder.typicode.com/photos?albumId=${this.props.id}`,
-      {
-        signal: this.abortController.signal
-      }
-    )
-      .then(response => response.json())
-      .then(photos =>
-        this.setState({ photo: photos[0], isLoading: false, error: null })
-      )
-      .catch(error =>
-        this.setState({ error: error.message, isLoading: false })
-      );
-  }
-
-  componentWillUnmount() {
-    this.abortController.abort();
-  }
-
   render() {
-    const { photo, isLoading, error } = this.state;
-    error && console.error(error);
     const {
       title,
       id,
       userId,
-      appContext: { getUserDataByUserId }
+      appContext: { getUserDataByUserId, getFirstPhotoInAlbum, isLoading }
     } = this.props;
     const userData = getUserDataByUserId(userId);
+
     return (
       <li className="album-li">
         <div className="album-li__img-container">
@@ -51,7 +22,7 @@ class AlbumListItem extends Component {
           ) : (
             <img
               className="album-li__img"
-              src={photo.thumbnailUrl}
+              src={getFirstPhotoInAlbum(id).thumbnailUrl}
               alt="thumbnail"
             />
           )}
