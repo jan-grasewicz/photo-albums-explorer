@@ -6,61 +6,42 @@ import "./Album.css";
 
 class Album extends Component {
   state = {
-    photos: [],
-    windowWidth: null,
-    isLoading: true,
-    error: null
+    windowWidth: null
   };
 
   updateWindowDimensions = () => {
     this.setState({ windowWidth: window.innerWidth });
   };
 
-  abortController = new AbortController();
-
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
-
-    fetch(
-      `https://jsonplaceholder.typicode.com/photos?albumId=${
-        this.props.match.params.albumId
-      }`,
-      {
-        signal: this.abortController.signal
-      }
-    )
-      .then(response => response.json())
-      .then(photos => this.setState({ photos, isLoading: false, error: null }))
-      .catch(error =>
-        this.setState({ error: error.message, isLoading: false })
-      );
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateWindowDimensions);
-    this.abortController.abort();
   }
 
   render() {
     const { albumId } = this.props.match.params;
-    const { photos, windowWidth, isLoading, error } = this.state;
-    error && console.error(error);
+    const { windowWidth } = this.state;
     const {
-      getUserDataByAlbumId,
       getAlbumDataByAlbumId,
-      isLoading: isContextDataLoading
+      getUserDataByAlbumId,
+      getPhotosByAlbumId,
+      isLoading
     } = this.props.appContext;
 
     const album = getAlbumDataByAlbumId(parseInt(albumId));
     const userData = getUserDataByAlbumId(parseInt(albumId));
+    const photos = getPhotosByAlbumId(parseInt(albumId));
     return (
       <div className="top-bar-fix">
-        <div className="album__info">
-          {isContextDataLoading ? (
-            <p>Loading...</p>
-          ) : (
-            <>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            <div className="album__info">
               <h2 className="album__info__title">
                 {album !== undefined && album.title}
               </h2>
@@ -70,14 +51,8 @@ class Album extends Component {
                   {userData !== undefined && userData.username}
                 </p>
               </Link>
-            </>
-          )}
-        </div>
-        <ul className="album__photos">
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            <>
+            </div>
+            <ul className="album__photos">
               {photos.map(photo => (
                 <li key={photo.id}>
                   <Link to={`/photo/${photo.id}`}>
@@ -89,9 +64,9 @@ class Album extends Component {
                   </Link>
                 </li>
               ))}
-            </>
-          )}
-        </ul>
+            </ul>
+          </>
+        )}
       </div>
     );
   }

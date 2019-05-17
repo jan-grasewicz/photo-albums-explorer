@@ -7,6 +7,7 @@ export default class AppContextProvider extends Component {
   state = {
     users: [],
     albums: [],
+    photos: [],
     getUserDataByUserId: userId =>
       this.state.users.find(user => user.id === userId),
     getUserDataByAlbumId: albumId => {
@@ -17,6 +18,16 @@ export default class AppContextProvider extends Component {
     },
     getAlbumDataByAlbumId: albumId =>
       this.state.albums.find(album => album.id === albumId),
+    getPhotosByAlbumId: albumId =>
+      this.state.photos.filter(photo => photo.albumId === albumId),
+    getFirstPhotoInAlbum: albumId => {
+      const photos = this.state.getPhotosByAlbumId(albumId);
+      return photos[0];
+    },
+    getPhotoByPhotoId: photoId => {
+      const photo = this.state.photos.filter(photo => photo.id === photoId);
+      return photo[0];
+    },
     isLoading: true,
     error: null
   };
@@ -29,12 +40,16 @@ export default class AppContextProvider extends Component {
   albumsPromise = fetch("https://jsonplaceholder.typicode.com/albums", {
     signal: this.abortController.signal
   }).then(response => response.json());
+  photosPromise = fetch("https://jsonplaceholder.typicode.com/photos", {
+    signal: this.abortController.signal
+  }).then(response => response.json());
 
   componentDidMount() {
-    Promise.all([this.usersPromise, this.albumsPromise])
-      .then(([users, albums]) => {
+    Promise.all([this.usersPromise, this.albumsPromise, this.photosPromise])
+      .then(([users, albums, photos]) => {
         this.setState({ users });
         this.setState({ albums });
+        this.setState({ photos });
       })
       .then(() => this.setState({ error: null, isLoading: false }))
       .catch(error =>
