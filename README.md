@@ -1,3 +1,5 @@
+# photo-albums-explorer
+
 ## How to start this app:
 - Clone this repository to your computer, like this.\
 https://help.github.com/en/articles/cloning-a-repository \
@@ -16,3 +18,4 @@ And enter it's directory.
 >**yarn**\
 >**yarn start**
 - App should open in your browser. If not, Ctrl+Click on one of the links that appeared in console.
+- To close the server press Ctrl+C in console.
